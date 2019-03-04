@@ -1,0 +1,6 @@
+author: EhAquiDevs
+depend: [LuckPerms, EhCore]
+description: EhChat
+name: EhChat
+main: net.ehaqui.ehchat.Main
+version: 0.5
