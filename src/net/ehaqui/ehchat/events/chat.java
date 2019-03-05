@@ -30,14 +30,12 @@ public class chat implements Listener {
         for (Object chat: chats) {
            if (Bukkit.getPluginManager ().getPlugin("EhChat").getConfig ().getString("chats." + chat + ".prefix") != null) {
                if (event.getMessage ().charAt (0) == Bukkit.getPluginManager ().getPlugin("EhChat").getConfig ().getString("chats." + chat + ".prefix").charAt (0)) {
-                   if (Bukkit.getPluginManager ().getPlugin("EhChat").getConfig ().getInt ("chats." + chat + ".radius") == 0) {
-                       String message;
-                       message = Bukkit.getPluginManager ().getPlugin("EhChat").getConfig ().getString("chats." + chat + ".format");
-                       message = Utils.formatColor(message.replace("$NICK", formatedname));
-                       message = message.replace ("$MSG", event.getMessage ().substring (1));
-                       Bukkit.broadcastMessage (message);
-                       return;
-                   }
+                   String message;
+                   message = Bukkit.getPluginManager ().getPlugin("EhChat").getConfig ().getString("chats." + chat + ".format");
+                   message = Utils.formatColor(message.replace("$NICK", formatedname));
+                   message = message.replace ("$MSG", event.getMessage ().substring (1));
+                   Bukkit.broadcastMessage (message);
+                   return;
                }
 
            }
