@@ -3,21 +3,22 @@ package net.ehaqui.ehchat.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.List;
-
 public class Utils {
-    public static Object[] playersAround(Player player, int radius) {
-        Object[] allplayers = Bukkit.getOnlinePlayers ().toArray ();
-        List<Player> playersfound = null;
-        for (Object playerine: allplayers) {
-            if (((Player) playerine).getLocation ().distance (player.getLocation ()) <= radius&&((Player) playerine).getUniqueId () != player.getUniqueId ()) {
-                playersfound.add (((Player) playerine));
+    public static void Local(Player player, int radius, String message, String nick) {
+        int yes = 0;
+        for (Player entity : Bukkit.getOnlinePlayers ()) {
+            if (entity.getLocation ().distance (player.getLocation ()) <= radius && entity.getUniqueId () != player.getUniqueId ()) {
+                yes = +1;
             }
         }
-        if (playersfound == null) {
-            return null;
+        if (yes != 0) {
+            for (Player entity : Bukkit.getOnlinePlayers ()) {
+                if (entity.getLocation ().distance (player.getLocation ()) <= radius) {
+                    entity.sendRawMessage (net.ehaqui.ehcore.utils.Utils.formatColor (nick + "&7 :&r ") + message);
+                }
+            }
         } else {
-            return playersfound.toArray ();
+            player.sendRawMessage ("Não há ninguem perto de você...");
         }
     }
 }
