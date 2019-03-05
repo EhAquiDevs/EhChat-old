@@ -1,0 +1,12 @@
+#É necessário listar os chats
+chats:
+  custom:
+    - 'Global'
+  Local:
+    format: '&7$NICK &7: $MSG'
+    radius: 100
+    prefix: ''
+  Global:
+    format: '&7[&a&lG&7] $NICK &7: $MSG'
+    radius: 0 #0 = Global
+    prefix: '!'
