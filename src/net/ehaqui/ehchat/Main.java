@@ -1,6 +1,6 @@
 package net.ehaqui.ehchat;
 
-import net.ehaqui.ehchat.events.chat;
+import net.ehaqui.ehchat.events.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,7 +22,7 @@ public class Main extends JavaPlugin {
             Bukkit.getServer ().getPluginManager ().getPlugin ("EhCore").getLogger ().info ("Config OK");
         }
         this.getLogger ().info ("Registrando eventos...");
-        this.getServer ().getPluginManager ().registerEvents (new chat (), this);
+        this.getServer ().getPluginManager ().registerEvents (new Chat(this), this);
         this.getLogger ().info ("OK!");
     }
 
