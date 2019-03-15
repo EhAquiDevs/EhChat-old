@@ -4,6 +4,7 @@ package net.ehaqui.ehchat.events;
 import net.ehaqui.ehchat.Main;
 import net.ehaqui.ehcore.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,6 +33,16 @@ public class Chat implements Listener {
 
         if (event.getMessage().length() == 1 && player.hasPermission("chats.local.permission.send")) {
             net.ehaqui.ehchat.utils.Utils.Local (player, 100, event.getMessage (), formatedname);
+            return;
+        }
+
+        if (event.getMessage().charAt(0) == '#') {
+            Player destino = Bukkit.getPlayer(event.getMessage().split(" ")[0].substring(1));
+            if (destino == null) {
+                player.sendMessage(ChatColor.RED + "O player não está online ou não existe.");
+                return;
+            }
+            net.ehaqui.ehchat.utils.Utils.privado(player, destino, event.getMessage());
             return;
         }
 
