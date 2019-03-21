@@ -17,7 +17,7 @@ public class Utils {
             if (!(entity.hasPermission("chats.local.permission.see"))) {
                 continue;
             }
-            if (entity.getLocation().distance(player.getLocation ()) <= radius && entity.getUniqueId() != player.getUniqueId()) {
+            if (entity.getLocation().distance(player.getLocation ()) <= radius) {
                 entity.sendMessage(formatColor(nick + "&7 :&r ") + message);
                 sentMessage = true;
             }
