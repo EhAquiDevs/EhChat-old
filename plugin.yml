@@ -3,4 +3,37 @@ depend: [LuckPerms, EhCore]
 description: EhChat
 name: EhChat
 main: net.ehaqui.ehchat.Main
-version: 0.5
+version: "0.5"
+permissions:
+  chats.color:
+    default: op
+
+  chats.local.permission.see:
+    default: true
+  chats.local.permission.send:
+    default: true
+
+  chats.privado.permission.see:
+    default: true
+  chats.privado.permission.send:
+    default: true
+
+  chats.global.permission.see:
+    default: true
+  chats.global.permission.send:
+    default: true
+
+  chats.ajuda.permission.see:
+    default: true
+  chats.ajuda.permission.send:
+    default: true
+
+  chats.denuncia.permission.see:
+    default: op
+  chats.denuncia.permission.send:
+    default: true
+
+  chats.info.permission.see:
+    default: true
+  chats.info.permission.send:
+    default: op

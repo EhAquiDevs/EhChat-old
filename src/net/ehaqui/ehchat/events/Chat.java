@@ -11,6 +11,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import java.util.logging.Logger;
+
 public class Chat implements Listener {
 
     private Main plugin;
@@ -22,27 +24,33 @@ public class Chat implements Listener {
     @EventHandler
     public void onAsyncChatEvent(AsyncPlayerChatEvent event) {
 
+        event.setCancelled (true);
         Player player = event.getPlayer();
 
         String formatedname = Utils.NameStruct(player);
-        event.setCancelled (true);
+        String sentMessage = event.getMessage();
+
+        if (player.hasPermission("chats.color")) {
+            sentMessage = sentMessage.replace('&', ChatColor.COLOR_CHAR);
+        }
+
 
         FileConfiguration config = plugin.getConfig();
 
         Object[] chats = config.getStringList("chats.custom").toArray();
 
-        if (event.getMessage().length() == 1 && player.hasPermission("chats.local.permission.send")) {
-            net.ehaqui.ehchat.utils.Utils.Local (player, 100, event.getMessage (), formatedname);
+        if (sentMessage.length() == 1 && player.hasPermission("chats.local.permission.send")) {
+            net.ehaqui.ehchat.utils.Utils.Local (player, 100, sentMessage, formatedname);
             return;
         }
 
-        if (event.getMessage().charAt(0) == '#') {
-            Player destino = Bukkit.getPlayer(event.getMessage().split(" ")[0].substring(1));
+        if (sentMessage.charAt(0) == '#') {
+            Player destino = Bukkit.getPlayer(sentMessage.split(" ")[0].substring(1));
             if (destino == null) {
                 player.sendMessage(ChatColor.RED + "O player não está online ou não existe.");
                 return;
             }
-            net.ehaqui.ehchat.utils.Utils.privado(player, destino, event.getMessage());
+            net.ehaqui.ehchat.utils.Utils.privado(player, destino, sentMessage);
             return;
         }
 
@@ -52,13 +60,17 @@ public class Chat implements Listener {
                 continue;
             }
 
-            if (event.getMessage().charAt(0) == config.getString ("chats." + chat + ".prefix").charAt(0)) {
+            if (sentMessage.charAt(0) == config.getString ("chats." + chat + ".prefix").charAt(0)) {
+
+                Logger logger = Bukkit.getLogger();
 
                 if (player.hasPermission("chats." + chat + ".permission.send")) {
                     String message;
                     message = config.getString ("chats." + chat + ".format");
                     message = Utils.formatColor(message.replace("$NICK", formatedname));
-                    message = message.replace("$MSG", event.getMessage().substring(1).trim());
+                    message = message.replace("$MSG", sentMessage.substring(1).trim());
+
+                    logger.info(ChatColor.stripColor(message));
 
                     for (Player entity : Bukkit.getOnlinePlayers ()) {
                         if (entity.hasPermission ("chats." + chat + ".permission.see")) {
@@ -69,13 +81,13 @@ public class Chat implements Listener {
                     return;
 
                 } else if (player.hasPermission("chats.local.permission.send")) {
-                    net.ehaqui.ehchat.utils.Utils.Local (player, 100, event.getMessage (), formatedname);
+                    net.ehaqui.ehchat.utils.Utils.Local (player, 100, sentMessage, formatedname);
                     return;
                 }
             }
         }
         if (player.hasPermission("chats.local.permission.send")) {
-            net.ehaqui.ehchat.utils.Utils.Local (player, 100, event.getMessage (), formatedname);
+            net.ehaqui.ehchat.utils.Utils.Local (player, 100, sentMessage, formatedname);
         }
 
     }

@@ -1,10 +1,22 @@
 #É necessário listar os chats
 chats:
   custom:
-    - 'Global'
-  Local:
-    format: '&7$NICK &7: $MSG'
+    - 'global'
+    - 'ajuda'
+    - 'denuncia'
+    - 'info'
+  local:
+    format: '&7$NICK&7&r: $MSG'
     prefix: ''
-  Global:
-    format: '&7[&a&lG&7] $NICK &7: $MSG'
+  global:
+    format: '&a[G] $NICK&r: &7$MSG'
     prefix: '!'
+  ajuda:
+    format: '&3[A] $NICK&r: &3$MSG'
+    prefix: '?'
+  denuncia:
+    format: '&c[D] $NICK&r: &c$MSG'
+    prefix: '\'
+  info:
+    format: '&a[INFO] $NICK&r: &a$MSG'
+    prefix: '@'
