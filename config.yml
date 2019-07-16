@@ -23,7 +23,7 @@ chats:
     prefix: '\'
     color: '6'
   evento:
-    format: '&4[&aEVENTO&4]&r: &7$MSG'
+    format: '&4[&aEVENTO&4] &r$NICK: &7$MSG'
     prefix: '$'
     color: '7'
   info:
