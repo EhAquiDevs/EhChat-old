@@ -4,19 +4,29 @@ chats:
     - 'global'
     - 'ajuda'
     - 'denuncia'
+    - 'evento'
     - 'info'
   local:
     format: '&7$NICK&7&r: $MSG'
     prefix: ''
+    color: 'r'
   global:
     format: '&a[G] $NICK&r: &7$MSG'
     prefix: '!'
+    color: '7'
   ajuda:
     format: '&3[A] $NICK&r: &3$MSG'
     prefix: '?'
+    color: '3'
   denuncia:
-    format: '&c[D] $NICK&r: &c$MSG'
+    format: '&c[DENÚNCIA] $NICK&r: &6$MSG'
     prefix: '\'
+    color: '6'
+  evento:
+    format: '&4[&aEVENTO&4]&r: &7$MSG'
+    prefix: '$'
+    color: '7'
   info:
     format: '&a[INFO] $NICK&r: &a$MSG'
     prefix: '@'
+    color: 'a'
